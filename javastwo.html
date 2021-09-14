@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>How to convert JSON data to html table</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body style = "text-align:left;" id = "body">	
+<p id = "NEW" style ="font-size: 15px; font-weight: bold;"></p>
+<button onclick = "constructTable('#table')">
+click here
+</button>
+<br><br>	
+<table align = "left" id="table" border="2">
+</table>	
+<script>
+var demoone = document.getElementById("NEW");		
+var list = [{"id":1,"first_name":"Kathlin","last_name":"Eynaud","email":"keynaud0@statcounter.com"},
+{"id":2,"first_name":"Georgina","last_name":"Klausen","email":"gklausen1@dell.com"},
+{"id":3,"first_name":"Umeko","last_name":"Barkaway","email":"ubarkaway2@about.com"},
+{"id":4,"first_name":"Wain","last_name":"Zmitruk","email":"wzmitruk3@lulu.com"},
+{"id":5,"first_name":"Shalna","last_name":"Donohoe","email":"sdonohoe4@un.org"},
+{"id":6,"first_name":"Talyah","last_name":"Juett","email":"tjuett5@lulu.com"},
+{"id":7,"first_name":"Preston","last_name":"Filipov","email":"pfilipov6@nps.gov"},
+{"id":8,"first_name":"Sibella","last_name":"Robarts","email":"srobarts7@foxnews.com"},
+{"id":9,"first_name":"Enrichetta","last_name":"Havik","email":"ehavik8@paginegialle.it"},
+{"id":10,"first_name":"Leyla","last_name":"Wrankmore","email":"lwrankmore9@thetimes.co.uk"}];
+		
+demoone.innerHTML = "Click on the button to create "+ "the table from the JSON data.<br><br>"
+			
+function constructTable(selector) {			
+var cols = Headers(list, selector);
+for (var i = 0; i < list.length; i++) {
+var row = $('<tr/>');
+for (var colIndex = 0; colIndex < cols.length; colIndex++)
+{
+var val = list[i][cols[colIndex]];				
+if (val == null) val = "";
+row.append($('<td/>').html(val));
+}
+$(selector).append(row);
+}
+}
+function Headers(list, selector) {
+var columns = [];
+var header = $('<tr/>');
+for (var i = 0; i < list.length; i++) {
+var row = list[i];
+for (var k in row) {
+if ($.inArray(k, columns) == -1) {
+columns.push(k);
+header.append($('<th/>').html(k));
+}
+}
+}
+$(selector).append(header);
+return columns;
+}	
+</script>
+</body>
+</html>
